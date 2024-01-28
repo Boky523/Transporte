@@ -67,7 +67,6 @@ const usetik = useTikStore()
 
 function cerrarsesion() {
   sessionStorage.removeItem("token");
-  inicio.value = "/";
 }
 
 async function listartik(){

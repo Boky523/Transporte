@@ -1,6 +1,5 @@
 import {defineStore} from "pinia"
 import axios from "axios"
-import {local} from '../variable.js'
 import {web} from '../variable.js'
 import {ref}  from "vue";
 
@@ -30,7 +29,6 @@ const pedirclientes = async()=>{
 
 
  const addClient = async(info) =>{
-    console.log("llega try");
     try {
         return await axios.post(`${web}/cliente`,info)
     } catch (error) {

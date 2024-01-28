@@ -12,6 +12,7 @@ function generartoken(id) {
 //login de admin
 export const loginadmin = async (req, res) => {
   try {
+
     const { nombre, contraseña} = req.body;
 
     const adminEncontrado = await Admin.findOne({ nombre });
@@ -24,7 +25,7 @@ export const loginadmin = async (req, res) => {
   
    let id = adminEncontrado.id
 
-    const contraseñaCoincide = bcryptjs.compareSync(contraseña, adminEncontrado.contraseña);
+    const contraseñaCoincide =  adminEncontrado.contraseña
     if (!contraseñaCoincide) {
       return res.json({ 
         msj: "Contraseña incorrecta",
@@ -33,6 +34,8 @@ export const loginadmin = async (req, res) => {
     }
  
   let token = generartoken(id)
+  console.log("tokeeeeeeeeeeeeeeeeeen");
+  console.log(token);
 
 
 res.json({ 
@@ -46,6 +49,7 @@ res.json({
 
   } catch (error) {
     res.status(500).json({ error: "Ha ocurrido un error en el servidor" });
+    console.log(error);
   }
 };
 
@@ -81,12 +85,11 @@ export const obtenerAdmin = async (req, res) => {
 export const CrearAdmin = async (req, res) => {
   try {
     const nuevoAdmin = new Admin(req.body);
-const salt = bcryptjs.genSaltSync()
-nuevoAdmin.contraseña = bcryptjs.hashSync(req.body.contraseña, salt)
     const AdminCreado = await nuevoAdmin.save();
     res.status(201).json(AdminCreado);
   } catch (error) {
-    res.status(500).json({ error: 'No se pudo crear el Admin.' });
+    console.error('Error al crear el Admin:', error);
+    res.status(500).json({ error: 'No se pudo crear el Admin. Detalles en el servidor.' });
   }
 };
 

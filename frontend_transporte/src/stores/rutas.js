@@ -1,6 +1,5 @@
 import {defineStore} from "pinia"
 import axios from "axios"
-import {local} from '../variable.js'
 import {web} from '../variable.js'
 export const useRutaStore = defineStore("rutas", ()=>{
 const pedirRutas = async()=>{

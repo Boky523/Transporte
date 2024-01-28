@@ -22,17 +22,19 @@ const routes = [
         {path: "/ventas", component : ventas},
         {path: "/ticket", component : Ticket}
         ],
-        beforeEnter: (to, from, next) => {
-            const toke = sessionStorage.getItem('token');
-            if(!toke && to.path !== '/'){
-                next('/')
-            }else{
-                next()
-            }
-        }
     }
     
 ]
+
+
+beforeEnter: (to, from, next) => {
+    const toke = sessionStorage.getItem('token');
+    if(!toke && to.path !== '/'){
+        next('/')
+    }else{
+        next()
+    }
+}
 
 
 export const router = createRouter({

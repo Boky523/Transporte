@@ -1,7 +1,6 @@
 import {defineStore} from "pinia"
 import axios from "axios"
 import { ref } from "vue";
-import {local} from '../variable.js'
 import {web} from '../variable.js'
 
 let lodin  = ref(false)

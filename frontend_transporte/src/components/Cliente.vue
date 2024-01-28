@@ -197,11 +197,8 @@ async function crearCliente() {
 
 // esto se ejecuta cada ves que oprimimos el boton de crear nuevo o el de editar uno ya existente
 function camtitulo(titulo, cliente) {
-  console.log(cliente);
   cliente_v.value = cliente._id;
   titulo_modal.value = titulo;
-  console.log(titulo_modal.value);
-  console.log(cliente_v.value);
   if (titulo_modal.value == "Editar cliente") {
     traer(cliente);
   } else {
