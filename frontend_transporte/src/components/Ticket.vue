@@ -1,16 +1,16 @@
 <template>
-  <div class="padre" style="margin-top: 10px;">
-    <div class="filtros" style="background-color: rgb(201, 231, 231);margin: 10px;border-radius: 20px;padding: 5px;">
-      <span style="font-weight: 600;font-size: 18px;">Rutas</span>
+  <div class="contenedor" >
+    <div class="filtros">
+      <span>Rutas</span>
       <select v-model="ruta_v" @click="traerutas()" @change="cambio_ruta()" class="select">
         <option v-for="ruta in rutas_get" :key="ruta._id" :value="ruta">
           {{ ruta.origen + " " + "➡️" + " " + ruta.destino }}
         </option>
       </select>
-      <span style="font-weight: 700;font-size: 20px;">Hora salida</span>
-      <span style="font-size: 15px;border-bottom: 1px solid black;margin: 10px;">{{ hora_v }}</span>
+      <span >Hora salida</span>
+      <span >{{ hora_v }}</span>
 
-      <span style="font-weight: 700;font-size: 20px;">Bus</span>
+      <span>Bus</span>
       <select v-model="bus_v" class="select">
         <option v-for="bus in bus_get" :key="bus._id" :value="bus">
           {{ bus.placa_vehiculo }}
@@ -24,14 +24,15 @@
     </div>
 
 
-
-
-
-    <div class="puestos">
+    <div id="antes">
+      <img src="../assets/antes_rutas.png" alt="">
+    </div>
+    
+    <div class="puestos" >
       <div class="puesto" v-for="(p, i) in resultados" :key="i">
-        <div :style="puestos.includes(i) ? 'background:#fb4a4a' : 'background:#50ecc2'">
+        <div class="pues" :style="puestos.includes(i) ? 'background:#512B81'  : 'background:#4477CE'">
           <img src="../assets/puesto_img.png" alt="" />
-          <span>{{ i+1 }}</span>
+          <span class="num_puesto">N.º {{i+1}}</span>
 
           <button v-if="!puestos.includes(i)" ype="button" class="btn btn-info" data-bs-toggle="modal"
             data-bs-target="#exampleModal" @click="num_puesto_f(i)">Vender</button>
@@ -39,13 +40,6 @@
         </div>
       </div>
     </div>
-
-
-
-
-
-
-
 
 
 
@@ -232,6 +226,7 @@ async function enviar_tik() {
 
 
 async function tikusado() {
+  document.getElementById('antes').style.display='none'
   await useTike
 
     .pedir_tick(ruta_v.value._id, bus_v.value._id, fecha_v.value, hora_v.value)
@@ -257,58 +252,34 @@ onMounted(() => {
 
 
 <style scoped>
-#padre_mesas {
+.contenedor{
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  width: 100%;
+}
+.filtros{
+  background-color: #35155D;
+  margin: 10px;
+  border-radius: 20px;
+  padding: 5px;
+  width: 500px;
+  height: 90vh;
+  gap: 50px;
+}
+
+
+.filtros span {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+
+
+#antes img{
+  width: 600px;
+  top: 20%;
+  left: 50%;
   position: relative;
 }
-
-body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-.card {
-  width: 230px;
-  margin: 10px;
-}
-
-.listado {
-  color: black;
-}
-
-.listado_pagos {
-  position: absolute;
-  top: 200px;
-  left: 1100px;
-}
-
-header {
-  font-size: 2rem;
-  font-family: "Times New Roman", Times, serif;
-  color: black;
-}
-
-td {
-  background-color: rgb(209, 224, 226);
-  padding: 5px;
-}
-
-tr {
-  color: green;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  font-size: 1rem;
-}
-
-.nombre_res {
-  color: rgb(185, 185, 33);
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-size: 4rem;
-}
-
 .modal-body {
   font-family: Arial, sans-serif;
 }
@@ -355,32 +326,22 @@ label {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 10px;
   overflow-y: scroll;
-  max-height: 500px;
+  height: 85vh;
   margin-top: 20px;
 
 }
 
-
-.puesto {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  height: 230px;
-  width: 180px;
-  border-radius: 5px;
-  justify-content: center;
-  justify-items: center;
-}
-
 .puesto button {
-  position: relative;
-  top: -20px;
+width: 90%;
+margin: 5%;
 }
 
 .puesto img {
   max-width: 100%;
   height: 10rem;
 }
+
+
 
 .puestos::-webkit-scrollbar {
   width: 5px;
@@ -391,15 +352,21 @@ label {
   border-radius: 20px;
 }
 
-.btn-primary {
-  margin-top: 10px;
+
+.pues{
+  border-radius: 15px;
+  display:flex;
+  flex-direction: column;
+  min-height: 250px;
 }
 
-.padre {
-  display: grid;
-  grid-template-columns: 30% 70%;
-  gap: 20px;
-  /* Espacio entre las columnas */
+.num_puesto{
+  font-size: 20px;
+  color: white;
+}
+
+.btn-primary {
+  margin-top: 10px;
 }
 
 .filtros {
@@ -417,29 +384,33 @@ input {
   margin: 10px;
 }
 
-.boton {
-  width: 150px;
-  height: 40px;
-  border-radius: 5px;
-  margin: 10px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 600;
-}
 
-.usado {
-  background-color: rgb(97, 190, 162);
-}
+
 
 .botones {
   display: flex;
 }
 
 .nuevo {
-  background-color: rgb(56, 144, 238);
+  width: 150px;
+  height: 40px;
+  border-radius: 5px;
+  margin: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  background-color:#8CABFF;
+  color: #512B81;
+  transition: all 0.5s;
+  border-color: rgba(255, 255, 255, 0);
 }
 
-.ddd {
-  background: rgb(74, 216, 166);
+.nuevo:hover{
+  background-color: #7499ff;
+  color: #ffff;
+}
+
+.nuevo:active{
+  transform: scale(0.93);
 }
 
 .select {
@@ -455,7 +426,8 @@ input {
   width: 96%;
 }
 
-.ca {
-  color: #fb4a4a;
+.busqueda{
+  display: flex;
+  flex-direction: column;
 }
 </style>

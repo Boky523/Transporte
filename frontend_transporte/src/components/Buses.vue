@@ -1,11 +1,38 @@
 <template>
   <div class="contenedor">
-    <span class="subtitulo">Gestion de Buses</span>
-    <button class="clienew" data-bs-toggle="modal" data-bs-target="#bus" type="button"  @click="camtitulo('Crear Bus', true)" >
-      Crear nuevo Bus
-    </button>
-    <div class="busqueda">
-      <input type="text" placeholder="buscar Bus"  v-model="buscado_v"/><img class="lupa" src="../assets/lupa.png" alt="" />
+
+    <div class="superior">
+      <div class="titulo"><span class="subtitulo">Gestion de Buses</span></div>
+    </div>
+    <div class="acciones">
+
+      <div class="busqueda">
+
+        <div class="container">
+          <input id="input" type="text" placeholder="buscar Bus" v-model="buscado_v" />
+          <button class="search__btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
+              <path
+                d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"
+                fill="#efeff1"></path>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <div class="boton-accion">
+        <a style="--clr: #7808d0" class="button" data-bs-toggle="modal" data-bs-target="#bus"
+          @click="camtitulo('Crear Bus', true)">
+          <span class="button__icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5V19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          Registrar Nuevo Bus
+        </a>
+      </div>
     </div>
 
     <div class="tabla" style="overflow-y:scroll; max-height: 400px;position: relative;">
@@ -15,12 +42,11 @@
             
             <th>nombre conductor</th>
             <th>placa vehiculo</th>
-            <th>cantidad puestos</th>
+            <th>Num puestos</th>
             <th>marca</th>
             <th>modelo</th>
-            <th>estado</th>
-            <th>Opciones</th>
             <th>Estado</th>
+            <th>Editar</th>
 
           </tr>
         </thead>
@@ -33,32 +59,23 @@
             <td>{{ vehiculo.marca }}</td>
             <td>{{ vehiculo.modelo }}</td>
             <td>
-              <span v-if="vehiculo.estado== 1" style="color: #25e40b;font-size: 1.1rem;">activo</span>
-              <span v-else style="color: #e4240b;font-size: 1.1rem;" >Inactivo</span>
-            </td>
-
-            <td>
-              <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#bus"
-                @click="camtitulo('Editar Bus', vehiculo)">
-                Editar
-              </button>
-            </td>
-
-            <td>
 
 
                 
-              <img id="estaimg" src="../assets/cancelar.png" alt="" v-if="vehiculo.estado == true"  type="button"
-                  class="estado true"  @click="estado(true , vehiculo)"/>
+              <img id="estaimg" src="../assets/cancelar.png" alt="" v-if="vehiculo.estado == false"  type="button"
+                  class="estado true"  @click="estado(false , vehiculo)"/>
 
 
               <img id="estaimg" src="../assets/aceptar.png" alt="" v-else type="button" class="estado false"
-                @click="estado(false, vehiculo)"/>
+                @click="estado(true, vehiculo)"/>
 
                 
               </td>
 
-
+            <td>
+              <img data-bs-toggle="modal" data-bs-target="#modal" @click="camtitulo('Editar Conductor', conductor)"
+                class="editar" src="../assets/editar.png" alt="">
+            </td>
 
           </tr>
         </tbody>
@@ -380,237 +397,6 @@ onMounted(() => {
   
   
 <style scoped>
-.subtitulo {
-  font-size: 2.1rem;
-  font-weight: 600;
-  font-family: "Times New Roman", Times, serif;
-  position: relative;
-  left: 40%;
-  top: 30px;
-}
-
-/* Estilos para la tabla */
-table {
-  width: 95%;
-  position: relative;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  left: 2.5%;
-}
-
-/* Estilos para los encabezados de la tabla */
-th {
-  background-color: #252966;
-  border: 2px solid #ffffff;
-  text-align: center;
-  padding: 8px;
-  color: #dddddd;
-}
-
-/* Estilos para las celdas de la tabla */
-td {
-  border: 1px solid #dddddd;
-  text-align: center;
-  padding: 8px;
-}
-
-/* Estilos para las filas pares de la tabla */
-tbody tr:nth-child(even) {
-  background-color: rgb(238, 238, 255);
-}
-
-/* Estilos para el resaltado al pasar el mouse por una fila */
-tbody tr:hover {
-  background-color: #1a4c973f;
-}
-
-.clienew {
-  position: relative;
-  width: 150px;
-  height: 50px;
-  left: 70%;
-  top: 20px;
-  background-color: #000000;
-  color: white;
-  transition: all 0.4s;
-  border: solid 3px rgb(204, 204, 255);
-  font-size: 15px;
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: 700;
-
-}
-
-.clienew:hover {
-  scale: 1.02;
-  background-color: #000000;
-  border-radius: 5px;
-}
-
-.clienew:active {
-  background-color: #000000;
-  scale: 0.9;
-  border-radius: 25px;
-}
-
-.edi {
-  width: 30px;
-}
-
-.btedi {
-  top: -7px;
-}
-
-.lupa {
-  width: 40px;
-  height: 40px;
-  position: relative;
-  top: 5px;
-}
-
-.busqueda {
-  display: flex;
-  top: -10px;
-  position: relative;
-  margin: 20px;
-}
-
-.busqueda input {
-  width: 250px;
-  height: 40px;
-  outline: none;
-  border: 3px solid rgb(224, 224, 255);
-  font-size: 16px;
-  margin: 5px;
-}
-
-.busqueda input::placeholder {
-  text-align: center;
-  /* Centra el placeholder */
-  /* Opcionalmente, puedes ajustar otros estilos, como color o tamaño de fuente */
-}
-
-
-
-.tabla{
-  position: relative;
-  right: 10px;
-}
-
-.tabla::-webkit-scrollbar{
-width: 5px;
-}
-
-.tabla::-webkit-scrollbar-thumb{
-  background-color: #252966;
-border-radius: 20px;
-
-}
-
-
-
-
-
-
-
-/* Estilos generales */
-.modal-body {
-  font-family: Arial, sans-serif;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.modal input {
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-/* Estilos adicionales para mejorar la visualización */
-/* Puedes ajustar estos estilos según tus preferencias */
-
-/* Cambiar el color de fondo del formulario */
-.modal-body {
-  background-color: #f9f9f9;
-}
-
-/* Alinear los campos del formulario al centro */
-.form-group {
-  width: 80%;
-  margin: 0 auto;
-}
-
-/* Estilos para los botones de estado */
-.estado {
-  margin-top: 15px;
-}
-
-.estado-buttons {
-  display: flex;
-}
-
-.modal select {
-  width: 100%;
-  height: 35px;
-}
-
-.btn {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  color: #fff;
-}
-
-.btn-activo {
-  background-color: #28a745; /* Color verde para estado activo */
-}
-
-.btn-inactivo {
-  background-color: #dc3545; /* Color rojo para estado inactivo */
-}
-
-
-.alerta{
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 17px;
-  position: relative;
-  bottom: -20px;
-  color: red;
-  font-weight: 100;
-}
-
-
-
-
-
-input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0; /* Puedes ajustar el margen si es necesario */
-  }
-
-
-
-.estado {
-  width: 30px;
-  height: 30px;
-  border-radius: 5px;
-}
-
-
-
-
-
 
 </style>
   

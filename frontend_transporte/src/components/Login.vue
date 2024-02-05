@@ -142,8 +142,9 @@ function paso() {
 }
 
 .login {
+  backdrop-filter: blur(3px);
   display: flex;
-  background-color: #020c47bb;
+  background-color: #35155db9;
   overflow: hidden;
 }
 
@@ -262,7 +263,7 @@ button {
 }
 
 button {
-  --primary-color: #c767ff;
+  --primary-color: #d270ff;
   --hovered-color: #ffffff;
   position: relative;
   display: flex;

@@ -1,3 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@200&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Karla', sans-serif;
+}
+
 body{
     overflow-x:hidden;
+    background: #eee9f3;   
 }
+
+.modal{
+    background-color: rgba(0, 0, 0, 0.253);
+}
+
+.modal-content{
+    background-color: #6b40a0;
+    color: rgb(48, 2, 54);
+}
+
+.modal-body{
+    background-color: #fbf8ff;
+}
+
+.modal-header{
+  color: white;
+}
+
+.modal input {
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    color: black;    
+    font-weight: 700;
+  }
+
+  .titulo {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .subtitulo{
+    font-size: 35px;
+    font-weight: 600;
+    color: #252966;
+  }
+  .acciones {
+    display: flex;
+    width: 95%;
+    position: relative;
+    left: 30px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  
+  
+  
+  
+  /* Estilos para la tabla */
+  table {
+    width: 95%;
+    position: relative;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    left: 2.5%;
+  }
+  
+  /* Estilos para los encabezados de la tabla */
+  th {
+    background-color: #4477CE;
+    border: 2px solid #3f3763;
+    text-align: center;
+    padding: 8px;
+    color: #dddddd;
+    font-size: 16px;
+  }
+  
+  /* Estilos para las celdas de la tabla */
+  td {
+    background-color: #8CABFF;
+    border: 1px solid #3f3763;
+    text-align: center;
+    padding: 8px;
+    color: #000000;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  
+  /* Estilos para las filas pares de la tabla */
+  tbody tr:nth-child(even) {
+    background-color: rgb(238, 238, 255);
+  }
+  
+  /* Estilos para el resaltado al pasar el mouse por una fila */
+  tbody tr:hover {
+    background-color: #1a4c973f;
+  }
+  
+  .clienew {
+    position: relative;
+    width: 150px;
+    height: 50px;
+    left: 65%;
+    top: 20px;
+    background-color: #000000;
+    color: white;
+    transition: all 0.4s;
+    border: solid 3px rgb(204, 204, 255);
+    font-size: 15px;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: 700;
+  }
+  
+  
+  .busqueda {
+    display: flex;
+    margin: 20px;
+  }
+  
+  .busqueda input {
+    width: 250px;
+    height: 40px;
+    outline: none;
+    border: 3px solid rgb(224, 224, 255);
+    font-size: 16px;
+    margin: 5px;
+  }
+  
+  .busqueda input::placeholder {
+    text-align: center;
+  }
+  
+  .tabla {
+    position: relative;
+    right: 10px;
+  }
+  
+  .tabla::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .tabla::-webkit-scrollbar-thumb {
+    background-color: #252966;
+    border-radius: 20px;
+  }
+  
+  
+  
+  .modal-body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  .editar{
+    width: 30px;
+    cursor: pointer;
+  }
+  
+  
+  
+  .estado {
+    width: 30px;
+    height: 30px;
+  }
+  
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    /* Puedes ajustar el margen si es necesario */
+  }
+  
+  
+  
+  
+  
+  
+  
+  .button {
+    line-height: 1;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: .75rem;
+    background-color: var(--clr);
+    color: #fff;
+    border-radius: 10rem;
+    font-weight: 600;
+    padding: .75rem 1.5rem;
+    padding-left: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color .3s;
+  }
+  
+  .button__icon-wrapper {
+    flex-shrink: 0;
+    width: 25px;
+    height: 25px;
+    position: relative;
+    color: var(--clr);
+    background-color: #fff;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  
+  .button:hover {
+    background-color: #512B81;
+    color: #12d45d;
+    cursor: pointer;
+  }
+  
+  .button:hover .button__icon-wrapper {
+    color: #12d45d;
+  }
+  
+  
+  
+  
+  
+  
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+  }
+  
+  #input {
+    max-width: 100%;
+    height: 100%;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #8CABFF;
+    caret-color: #ffffff;
+    color: #ffffff;
+    padding: 7px 10px;
+    border: 2px solid transparent;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    margin-right: 1px;
+    transition: all .2s ease;
+  }
+  
+  #input:hover {
+    border: 2px solid rgba(255, 255, 255, 0.16);
+  }
+  
+  #input:focus {
+    border: 2px solid #a970ff91;
+    background-color: #5688dd;
+  }
+  
+  #input::placeholder {
+    color: rgb(238, 238, 255);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+  .search__btn {
+    cursor:auto;
+    border: none;
+    background-color: rgba(42, 42, 45, 1);
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    height: 100%;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .search__btn:hover {
+    background-color: rgba(54, 54, 56, 1);
+  }
+  
