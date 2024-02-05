@@ -3,8 +3,7 @@
 import { useClientStore } from "../stores/admin.js";
 let useadmin = useClientStore();
 import { ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
-const route = useRoute();
+import { useRouter } from "vue-router";
 const router = useRouter();
 
 let nombre = ref("");
